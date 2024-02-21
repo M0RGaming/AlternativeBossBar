@@ -223,6 +223,7 @@ local function getBossPercentagesByName(name)
     if (not data) then
 
         if StupidBossNamesInsteadOfId[name] ~= nil then
+            data = {}
             local recievedData = StupidBossNamesInsteadOfId[name]
             for i,v in pairs(recievedData) do
                 data[v] = ""
