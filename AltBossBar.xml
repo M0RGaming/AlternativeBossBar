@@ -28,8 +28,8 @@
                         <StatusBar name="$(parent)LeftBgBar">
                             <Dimensions x="18" y="23"/>
                         </StatusBar>
-                        <Label name="$(parent)Text" font="ZoFontGamepad22" level="502" tier="1"/>
-                        <Label name="$(parent)Mech" font="$(GAMEPAD_MEDIUM_FONT)|$(GP_18)|thick-outline" level="502" tier="1"/>
+                        <Label name="$(parent)Text" font="$(GAMEPAD_MEDIUM_FONT)|$(GP_20)|thick-outline" level="502" tier="1"/>
+                        <Label name="$(parent)Mech" font="$(GAMEPAD_MEDIUM_FONT)|$(GP_20)|thick-outline" level="502" tier="1"/>
                         <Label name="$(parent)Name" font="ZoFontGamepad22" level="502" tier="1"/>
                     </Controls>
                 </Control>

@@ -207,6 +207,9 @@ local StupidBossNamesInsteadOfId = {
 }
 
 
+-- Modifying health thresholds to personal preference
+
+-- Assume +3 until something or another can be found to tell the differences
 CrutchAlerts.BossHealthBar.thresholds["Z'Maja"] = {
         [75] = "Siroria Spawn",
         [50] = "Relequen Spawn",
@@ -215,7 +218,51 @@ CrutchAlerts.BossHealthBar.thresholds["Z'Maja"] = {
         [5] = "Execute"
 }
 
+-- Crutch didnt show atro spawn points, also add blank bar at 20% for telling when to swap
+CrutchAlerts.BossHealthBar.thresholds["Lylanar"] = {
+        normHealth = 10906420,
+        vetHealth = 27943440,
+        hmHealth = 55886880,
+        ["Normal"] = {
+                [90] = "Atronach",
+                [80] = "Atronach",
+                [70] = "2nd Boss Teleports",
+                [65] = "1st Boss Teleports"
+        },
+        ["Veteran"] = {
+                [90] = "Atronach",
+                [80] = "Atronach",
+                [70] = "2nd Boss Teleports",
+                [65] = "1st Boss Teleports"
+        },
+        ["Hardmode"] = {
+                [90] = "Same Colour Atronach",
+                [85] = "Wrong Colour Atronach",
+                [80] = "Same Colour Atronach",
+                [75] = "Wrong Colour Atronach",
+                [70] = "2nd Boss Teleports",
+                [65] = "1st Boss Teleports",
+                [20] = ""
+        }
+}
+
+
+-- Crutch only uses boss1 names, ABB uses both bosses names, so add aliases
+CrutchAlerts.BossHealthBar.aliases["Turlassil"] = "Lylanar"
+CrutchAlerts.BossHealthBar.aliases["Reducer"] = "Reactor"
+CrutchAlerts.BossHealthBar.aliases["Reclaimer"] = "Reactor"
+
+CrutchAlerts.BossHealthBar.aliases["Hunter-Killer Positrox"] = "Hunter-Killer Negatrix"
+
+
+
+
+
 local function getBossPercentagesByName(name)
+
+
+    -- Following code was taken from Crutch. Prob better way of doing it, but not a priority rn
+
 
     local data
     if (GetZoneId(GetUnitZoneIndex("player")) == 1436) then
@@ -223,7 +270,6 @@ local function getBossPercentagesByName(name)
     else
         data = CrutchAlerts.BossHealthBar.thresholds[name] or CrutchAlerts.BossHealthBar.thresholds[CrutchAlerts.BossHealthBar.aliases[name]]
     end
-
 
     -- Detect HM or vet or normal first based on boss health
     -- If not found, prioritize HM, then vet, and finally whatever data there is
@@ -270,7 +316,6 @@ local function getBossPercentagesByName(name)
 
     return data
     
-    -- return data
 end
 
 local function getWidth()
