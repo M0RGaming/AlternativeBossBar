@@ -206,6 +206,15 @@ local StupidBossNamesInsteadOfId = {
     ["Matriarch Lladi Telvanni"] = { 70, 35 }, ["Matriarchin Lladi Telvanni"] = { 70, 35 }, ["La matriarche Lladi Telvanni"] = { 70, 35 }, ["Матриарх Ллади Телванни"] = { 70, 35 }, ["La matriarca Lladi Telvanni"] = { 70, 35 }, ["ルラディ・テルヴァンニ女族長"] = { 70, 35 }, ["女族长雷拉蒂·泰尔瓦尼"] = { 70, 35 },
 }
 
+
+CrutchAlerts.BossHealthBar.thresholds["Z'Maja"] = {
+        [75] = "Siroria Spawn",
+        [50] = "Relequen Spawn",
+        [40] = "Creepers",
+        [25] = "Galenwe Spawn",
+        [5] = "Execute"
+}
+
 local function getBossPercentagesByName(name)
 
     local data
