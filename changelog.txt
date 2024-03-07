@@ -1,0 +1,7 @@
+Version 2.1
+----------
+*Bug fix: Left a temporary global table in the code, fixed now to be the proper name.
+
+Version 2.0
+----------
+Forked from ABB, initial commit

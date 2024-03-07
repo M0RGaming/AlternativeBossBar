@@ -678,5 +678,4 @@ function ABB_Initialize(topLevelCtrl)
 end
 
 
-
-bb = bossBars
+AlternativeBossBars = bossBars
