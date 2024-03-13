@@ -1,6 +1,8 @@
 Version 2.1
 ----------
 *Bug fix: Left a temporary global table in the code, fixed now to be the proper name.
+*Bug fix: Fixed Font Alignment for U41
+*API Bump
 
 Version 2.0
 ----------

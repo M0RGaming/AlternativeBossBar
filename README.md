@@ -10,7 +10,8 @@ This is a modification to Alternative Boss Bar by BulDeZir, which includes a few
 - The addon also adds a few mechanics to Crutch, such as DSR twins atro spawns and Cloudrest +3 mechanics (only shows +3, might be able to identify the boss's + but I couldnt find anything)
 
 ### `Health Numbers`
-- Similar to base game, the health bar will now also show the proper health numbers as well as the percent on each of the bosses
+- Similar to base game, the health bar will now also show the proper health numbers as well as the percent on each of the bosses if you have it set to display so.
+- This display is dependant on your base game setting for Combat -> Resource Numbers.
 
 ### `Mechanic Preview`
 - Utilizing the mechanics provided by Crutch Alerts, A M0R Alternative Boss Bar will show upcoming mechanics and their names in the health bar
