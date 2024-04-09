@@ -248,13 +248,13 @@ CrutchAlerts.BossHealthBar.thresholds["Lylanar"] = {
 
 
 -- Crutch only uses boss1 names, ABB uses both bosses names, so add aliases
-CrutchAlerts.BossHealthBar.aliases["Turlassil"] = "Lylanar"
-CrutchAlerts.BossHealthBar.aliases["Reducer"] = "Reactor"
-CrutchAlerts.BossHealthBar.aliases["Reclaimer"] = "Reactor"
 
-CrutchAlerts.BossHealthBar.aliases["Hunter-Killer Positrox"] = "Hunter-Killer Negatrix"
-
-
+-- Thank you notnear for quickly mentioning this fix
+local aliases = {}
+aliases["Turlassil"] = "Lylanar"
+aliases["Reducer"] = "Reactor"
+aliases["Reclaimer"] = "Reactor"
+aliases["Hunter-Killer Positrox"] = "Hunter-Killer Negatrix"
 
 
 
@@ -266,9 +266,9 @@ local function getBossPercentagesByName(name)
 
     local data
     if (GetZoneId(GetUnitZoneIndex("player")) == 1436) then
-        data = CrutchAlerts.BossHealthBar.eaThresholds[name] or CrutchAlerts.BossHealthBar.eaThresholds[CrutchAlerts.BossHealthBar.aliases[name]]
+        data = CrutchAlerts.BossHealthBar.eaThresholds[name] or CrutchAlerts.BossHealthBar.eaThresholds[aliases[name]]
     else
-        data = CrutchAlerts.BossHealthBar.thresholds[name] or CrutchAlerts.BossHealthBar.thresholds[CrutchAlerts.BossHealthBar.aliases[name]]
+        data = CrutchAlerts.BossHealthBar.thresholds[name] or CrutchAlerts.BossHealthBar.thresholds[aliases[name]]
     end
 
     -- Detect HM or vet or normal first based on boss health

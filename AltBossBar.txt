@@ -7,7 +7,7 @@
 ## APIVersion: 101041
 ## Title: A M0R Alternative Boss Bar
 ## Author: |c943810BulDeZir|r, |c0DC1CF@M0R_Gaming|r
-## Version: 2.1
+## Version: 2.2
 ## Description: A modification to BulDeZir's Alternative Boss Bar which includes reading Crutch Alerts Mechanics and adds a few custom mechanics.
 ## SavedVariables: AltBossBarSavedVariables
 ## DependsOn: LibAddonMenu-2.0 CrutchAlerts

@@ -1,3 +1,7 @@
+Version 2.2
+----------
+*Bug fix: Updated support for latest crutch version removing aliases
+
 Version 2.1
 ----------
 *Bug fix: Left a temporary global table in the code, fixed now to be the proper name.
