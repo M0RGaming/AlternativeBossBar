@@ -423,7 +423,7 @@ function ABB_BossBar:FormatPercent(health, maxHealth)
         percentText = zo_round(percent)
     end
     --]]
-    percentText = ZO_FormatResourceBarCurrentAndMax(health, maxHealth, SETTINGS.HealthFormat) -- force number + percent display, might make setting
+    percentText = ZO_FormatResourceBarCurrentAndMax(health, maxHealth, SETTINGS.HealthFormat) -- seperate from base game UI settings as some people had issues.
 
     local nextMech = ""
     local nextPercent = 0

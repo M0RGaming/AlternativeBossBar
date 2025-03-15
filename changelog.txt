@@ -1,3 +1,9 @@
+Version 2.3
+----------
+Added a setting to choose what is shown on the health bar for the number format (instead of using the base game setting).
+*Bug fix: Refreshes thresholds at max health change, to fix edge case hardmode scenarios like Lep Seclusa first boss
+*API Bump
+
 Version 2.2
 ----------
 *Bug fix: Updated support for latest crutch version removing aliases
