@@ -353,6 +353,7 @@ function ABB_BossBar:Initialize(bossTag, topLevelCtrl, previousBar)
     self.bossPercentages = nil
     self.hasShield = false
     self.hasImmunity = false
+    self.oldMax = 0
     self.lines = {}
 
     self:ResetColors()
@@ -401,6 +402,8 @@ function ABB_BossBar:Refresh(force)
     end
     self.nameText:SetText(bossName)
     local health, maxHealth = GetUnitPower(self.unitTag, POWERTYPE_HEALTH)
+    --d("Refreshing: "..maxHealth.." from "..self.oldMax)
+    self.oldMax = maxHealth
     self:OnPowerUpdate(health, maxHealth, force)
 end
 
@@ -420,7 +423,7 @@ function ABB_BossBar:FormatPercent(health, maxHealth)
         percentText = zo_round(percent)
     end
     --]]
-    percentText = ZO_FormatResourceBarCurrentAndMax(health, maxHealth)
+    percentText = ZO_FormatResourceBarCurrentAndMax(health, maxHealth, RESOURCE_NUMBERS_SETTING_NUMBER_AND_PERCENT) -- force number + percent display, might make setting
 
     local nextMech = ""
     local nextPercent = 0
@@ -474,6 +477,12 @@ function ABB_BossBar:OnPowerUpdate(health, maxHealth, force)
         self.healthText:SetText(self:FormatPercent(health, maxHealth))
     else
         self.healthText:SetText(zo_iconFormat("esoui/art/icons/mapkey/mapkey_groupboss.dds", ICONSIZE, ICONSIZE))
+    end
+
+    if maxHealth ~= self.oldMax then
+        --d("Boss Health Changed")
+        self:Refresh()
+        self.oldMax = maxHealth
     end
 end
 
