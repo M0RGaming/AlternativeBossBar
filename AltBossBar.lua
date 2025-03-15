@@ -423,7 +423,7 @@ function ABB_BossBar:FormatPercent(health, maxHealth)
         percentText = zo_round(percent)
     end
     --]]
-    percentText = ZO_FormatResourceBarCurrentAndMax(health, maxHealth, RESOURCE_NUMBERS_SETTING_NUMBER_AND_PERCENT) -- force number + percent display, might make setting
+    percentText = ZO_FormatResourceBarCurrentAndMax(health, maxHealth, SETTINGS.HealthFormat) -- force number + percent display, might make setting
 
     local nextMech = ""
     local nextPercent = 0
@@ -632,7 +632,32 @@ local function InitializeAddonMenu()
         registerForRefresh = true,
     })
 
+    local HealthFormatValues = {
+        ["Off"] = RESOURCE_NUMBERS_SETTING_OFF,
+        ["Number Only"] = RESOURCE_NUMBERS_SETTING_NUMBER_ONLY,
+        ["Percent Only"] = RESOURCE_NUMBERS_SETTING_PERCENT_ONLY,
+        ["Number and Percent"] = RESOURCE_NUMBERS_SETTING_NUMBER_AND_PERCENT,
+    }
+    local HealthFormatLookup = {}
+    for i,v in pairs(HealthFormatValues) do
+        HealthFormatLookup[v] = i
+    end
+
     LAM2:RegisterOptionControls("ABB_Settings", {
+        {
+            type = "dropdown",
+            name = "Health Bar Number Format",
+            choices = {"Off", "Number Only", "Percent Only", "Number and Percent"},
+            getFunc = function() return HealthFormatLookup[SETTINGS.HealthFormat] end,
+            setFunc = function(newValue)
+                local formattedValue = HealthFormatValues[newValue]
+                if formattedValue == nil then
+                    d("Alternative Boss Bar: Some weird thing happened, please contact M0R to let him know you got this message. ID=01")
+                end
+                SETTINGS.HealthFormat = formattedValue
+                RefreshAllBosses()
+            end,
+        },
         {
             type = "checkbox",
             name = "Show Default Percent Lines (75%, 50%, 25%)",
@@ -665,6 +690,7 @@ function ABB_Initialize(topLevelCtrl)
             SETTINGS = ZO_SavedVars:NewAccountWide("AltBossBarSavedVariables", SV_VER, nil, {
                 SHOW_DEFAULTS = false,
                 NOTIFY_BEFORE_PERCENT = 2,
+                HealthFormat = RESOURCE_NUMBERS_SETTING_NUMBER_AND_PERCENT,
             })
 
             InitializeAddonMenu()
