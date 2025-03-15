@@ -11,7 +11,7 @@ This is a modification to Alternative Boss Bar by BulDeZir, which includes a few
 
 ### `Health Numbers`
 - Similar to base game, the health bar will now also show the proper health numbers as well as the percent on each of the bosses if you have it set to display so.
-- This display is dependant on your base game setting for Combat -> Resource Numbers.
+- The format to this system can be chosen in addon settings, similar to the base game settings.
 
 ### `Mechanic Preview`
 - Utilizing the mechanics provided by Crutch Alerts, A M0R Alternative Boss Bar will show upcoming mechanics and their names in the health bar
