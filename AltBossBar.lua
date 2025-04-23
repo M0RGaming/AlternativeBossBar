@@ -84,10 +84,19 @@ aliases["Reducer"] = "Reactor"
 aliases["Reclaimer"] = "Reactor"
 aliases["Hunter-Killer Positrox"] = "Hunter-Killer Negatrix"
 
-aliases["Venombow Daitel"] = "Shaper of Flesh"
-aliases["Rootstrider Maglin"] = "Shaper of Flesh"
-aliases["Keeper Taman"] = "Shaper of Flesh"
-aliases["Greenspeaker Baedalas"] = "Shaper of Flesh"
+
+
+-- need to add language aliases for turli, reducer, reclaimer, positrox, negatrix, shaper of flesh, lyl, zmaja
+AlternativeBossBars.aliases = aliases
+
+
+
+
+local combinedBossNames = {}
+combinedBossNames["Shaper of Flesh"] = "Hall of Fleshcraft"
+
+
+AlternativeBossBars.combinedBossNames = combinedBossNames
 
 
 
@@ -103,16 +112,17 @@ local function getBossPercentagesByName(name, isTotalBar)
 
     local localPotential = localData[name] or localData[aliases[name]]
     if localPotential then
-        data = localPotential
+        data = ZO_DeepTableCopy(localPotential)
     elseif (GetZoneId(GetUnitZoneIndex("player")) == 1436) then
         data = CrutchAlerts.BossHealthBar.eaThresholds[name] or CrutchAlerts.BossHealthBar.eaThresholds[aliases[name]]
     else
         data = CrutchAlerts.BossHealthBar.thresholds[name] or CrutchAlerts.BossHealthBar.thresholds[aliases[name]]
     end
 
+    --a = data
     if data and data.combinedHealthbar and (isTotalBar ~= true) then
-    	d("Was not a thing")
-    	d(data.combinedHealthbar)
+    	--d("Was not a thing")
+    	--d(data.combinedHealthbar)
         return nil
     end
 
@@ -231,6 +241,9 @@ function ABB_BossBar:Refresh(force)
     end
     local bossName = GetUnitName(self.unitTag)
     self.bossPercentages = getBossPercentagesByName(bossName)
+    --d(bossName)
+    --d(self.bossPercentages)
+    --d("")
     self.percentLinePool:ReleaseAllObjects()
     if self.bossPercentages ~= nil then
     	AlternativeBossBars.setCombinedBarVisible(self.unitTag, false)
@@ -388,13 +401,14 @@ function ABB_BossBar:Show()
     self.control:SetHidden(false)
 end
 
-function ABB_BossBar:Hide()
+function ABB_BossBar:Hide(dueToDespawn)
+    if dueToDespawn then AlternativeBossBars.setCombinedBarVisible(self.unitTag, false) end
     self.control:SetHidden(true)
     self.hasShield = false
     self.hasImmunity = false
     self:ResetColors()
     if self.nextBar ~= nil then
-        self.nextBar:Hide()
+        self.nextBar:Hide(dueToDespawn)
     end
 end
 
@@ -475,6 +489,11 @@ function combinedBossBar:Refresh(force)
     for i,v in pairs(self.unitTags) do
     	bossName = GetUnitName(v)
     	if (bossName ~= "") then
+            local potentialCombinedName = combinedBossNames[bossName] or combinedBossNames[aliases[bossName]]
+            if potentialCombinedName then
+                bossName = potentialCombinedName
+            end
+            
     		break
     	end
     end
@@ -557,24 +576,29 @@ end
 
 local function RefreshAllBosses(forceReset)
     local lastBossBar
+    local totalVisible = false
 
     for i = 1, MAX_BOSSES do
         local bossTag = "boss"..i
 
         if DoesUnitExist(bossTag) then
-            local hide = bossBars[bossTag]:Refresh(forceReset)
-            if not hide then
+            totalVisible = bossBars[bossTag]:Refresh(forceReset)
+            if not totalVisible then
             	bossBars[bossTag]:Show()
             end
         else
-            bossBars[bossTag]:Hide()
+            
+            bossBars[bossTag]:Hide(true)
             do break end
         end
 
         lastBossBar = bossBars[bossTag]
     end
 
-    if lastBossBar ~= nil then
+    if totalVisible then
+        COMPASS_FRAME_FRAGMENT:SetHiddenForReason("ABBar", true)
+        AttachTargetTo(totalBossBar.control)
+    elseif lastBossBar ~= nil then
         COMPASS_FRAME_FRAGMENT:SetHiddenForReason("ABBar", true)
         AttachTargetTo(lastBossBar.control)
     else
@@ -593,20 +617,26 @@ local function setCombinedBarVisible(unitTag, visible)
 	else
 		combinedVisibleTags[unitTag] = nil
 	end
-	if combinedVisibleTags == {} then
+
+    --d("Visible:")
+    --for i,v in pairs(combinedVisibleTags) do
+    --    d(i)
+    --end
+	if ZO_IsTableEmpty(combinedVisibleTags) then
 		-- set hidden
 		if hiddenBar == false then
+            hiddenBar = true
 			totalBossBar:Hide()
 			RefreshAllBosses()
 			totalBossBar:Refresh()
-			hiddenBar = true
+            --hiddenBar = true
 		end
 	else
-		if hiddenBar then
+		if hiddenBar == true then
+            hiddenBar = false
 			totalBossBar:Show()
 			--RefreshAllBosses()
 			totalBossBar:Refresh()
-			hiddenBar = false
 		end
 		-- set visible
 	end
