@@ -12,13 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: 'ArtaeumGroupTool'
+          path: 'AltBossBar'
 
       - name: Zip release
-        run: 7z a ArtaeumGroupTool.zip * -xr!*.git*
+        run: 7z a AltBossBar.zip * -xr!*.git*
 
 
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ArtaeumGroupTool.zip
+          files: AltBossBar.zip
