@@ -144,15 +144,15 @@ aliases["采集器人"] = "Reactor"
 local combinedBossNames = {}
 combinedBossNames["Shaper of Flesh"] = "Hall of Fleshcraft"
 -- de
-combinedBossNames["Former des Fleisches^m"] = "Halle des Fleischwerks^f"
+combinedBossNames["Former des Fleisches"] = "Halle des Fleischwerks^f"
 -- es
-combinedBossNames["moldeador de carne^m"] = "Salón de Manipulación de la Carne^m"
+combinedBossNames["moldeador de carne"] = "Salón de Manipulación de la Carne^m"
 -- fr
-combinedBossNames["façonneur de chair^m"] = "Salle des sculptechairs"
+combinedBossNames["façonneur de chair"] = "Salle des sculptechairs"
 -- jp
-combinedBossNames["肉の加工者^n"] = "肉細工の間"
+combinedBossNames["肉の加工者"] = "肉細工の間"
 -- ru
-combinedBossNames["Формирователь плоти^n"] = "Зал Преображения Плоти"
+combinedBossNames["Формирователь плоти"] = "Зал Преображения Плоти"
 -- zh
 combinedBossNames["血肉塑形者"] = "血肉大厅"
 
@@ -468,7 +468,7 @@ function ABB_BossBar:Show()
 end
 
 function ABB_BossBar:Hide(dueToDespawn)
-    if dueToDespawn then AlternativeBossBars.setCombinedBarVisible(self.unitTag, false) end
+    if (dueToDespawn) and (not DoesUnitExist(self.unitTag)) then AlternativeBossBars.setCombinedBarVisible(self.unitTag, false) end
     self.control:SetHidden(true)
     self.hasShield = false
     self.hasImmunity = false
@@ -552,12 +552,14 @@ function combinedBossBar:Refresh(force)
     end
 
     local bossName = ""
+    local displayName = ""
     for i,v in pairs(self.unitTags) do
     	bossName = GetUnitName(v)
     	if (bossName ~= "") then
+            displayName = bossName
             local potentialCombinedName = combinedBossNames[bossName] or combinedBossNames[aliases[bossName]]
             if potentialCombinedName then
-                bossName = potentialCombinedName
+                displayName = potentialCombinedName
             end
             
     		break
@@ -579,7 +581,7 @@ function combinedBossBar:Refresh(force)
             self:CreateLine(i)
         end
     end
-    self.nameText:SetText(bossName)
+    self.nameText:SetText(displayName)
     --local health, maxHealth = GetUnitPower(self.unitTag, POWERTYPE_HEALTH)
     --d("Refreshing: "..maxHealth.." from "..self.oldMax)
     --self.oldMax = maxHealth
