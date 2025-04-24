@@ -86,14 +86,80 @@ aliases["Hunter-Killer Positrox"] = "Hunter-Killer Negatrix"
 
 
 
--- need to add language aliases for turli, reducer, reclaimer, positrox, negatrix, shaper of flesh, lyl, zmaja
+-- need to add language aliases for turli, reducer, reclaimer, positrox, shaper of flesh, lyl, zmaja
 AlternativeBossBars.aliases = aliases
+
+
+
+
+-- language aliases
+-- de
+aliases["Abfänger Positrox"] = "Hunter-Killer Negatrix"
+aliases["Lylanar"] = "Lylanar"
+aliases["Minderer"] = "Reactor"
+aliases["Rückforderer"] = "Reactor"
+aliases["Turlassil"] = "Lylanar"
+aliases["Z'Maja"] = "Z'Maja"
+-- es
+aliases["Lylanar"] = "Lylanar"
+aliases["Reinvindicador"] = "Reactor"
+aliases["Turlassil"] = "Lylanar"
+aliases["Z'Maja"] = "Z'Maja"
+aliases["cazador asesino Positrox"] = "Hunter-Killer Negatrix"
+aliases["reductor"] = "Reactor"
+-- fr
+aliases["Lylanar"] = "Lylanar"
+aliases["Turlassil"] = "Lylanar"
+aliases["Z'Maja"] = "Z'Maja"
+aliases["chasseur-tueur positrox"] = "Hunter-Killer Negatrix"
+aliases["récupérateur"] = "Reactor"
+aliases["réducteur"] = "Reactor"
+-- jp
+aliases["ズマジャ"] = "Z'Maja"
+aliases["トゥルラシル"] = "Lylanar"
+aliases["ハンターキラー・ポジトロクス"] = "Hunter-Killer Negatrix"
+aliases["リクライマー"] = "Reactor"
+aliases["リデューサー"] = "Reactor"
+aliases["リラナー"] = "Lylanar"
+-- ru
+aliases["З'Маджа"] = "Z'Maja"
+aliases["Лиланар"] = "Lylanar"
+aliases["Охотник-убийца Позитрокс"] = "Hunter-Killer Negatrix"
+aliases["Регенератор"] = "Reactor"
+aliases["Редуктор"] = "Reactor"
+aliases["Турлассил"] = "Lylanar"
+-- zh
+aliases["减速器人"] = "Reactor"
+aliases["图拉塞尔"] = "Lylanar"
+aliases["泽玛亚"] = "Z'Maja"
+aliases["猎杀者博西特洛克斯"] = "Hunter-Killer Negatrix"
+aliases["莱拉纳尔"] = "Lylanar"
+aliases["采集器人"] = "Reactor"
+
+
 
 
 
 
 local combinedBossNames = {}
 combinedBossNames["Shaper of Flesh"] = "Hall of Fleshcraft"
+-- de
+combinedBossNames["Former des Fleisches^m"] = "Halle des Fleischwerks^f"
+-- es
+combinedBossNames["moldeador de carne^m"] = "Salón de Manipulación de la Carne^m"
+-- fr
+combinedBossNames["façonneur de chair^m"] = "Salle des sculptechairs"
+-- jp
+combinedBossNames["肉の加工者^n"] = "肉細工の間"
+-- ru
+combinedBossNames["Формирователь плоти^n"] = "Зал Преображения Плоти"
+-- zh
+combinedBossNames["血肉塑形者"] = "血肉大厅"
+
+
+
+
+
 
 
 AlternativeBossBars.combinedBossNames = combinedBossNames
