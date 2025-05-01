@@ -532,7 +532,7 @@ function combinedBossBar:OnPowerUpdate(unitTag, powerPool, powerPoolMax)
     ZO_StatusBar_SmoothTransition(self.healthBar, health, maxHealth, false)
     self.healthLeftBgBar:SetValue((health > 0 and 1 or 0))
 
-    if health > 0 and not IsUnitDead(self.unitTag) then
+    if health > 0 then
         self.healthText:SetText(self:FormatPercent(health, maxHealth))
     else
         self.healthText:SetText(zo_iconFormat("esoui/art/icons/mapkey/mapkey_groupboss.dds", ICONSIZE, ICONSIZE))
@@ -600,9 +600,20 @@ function combinedBossBar:Refresh(force)
 
 end
 
+function combinedBossBar:unitCreated(unitTag)
+    if self.bossHealthsCurrent[unitTag] == nil then
+        local unitHealth, unitMaxHealth = GetUnitPower(unitTag, COMBAT_MECHANIC_FLAGS_HEALTH)
+        self:OnPowerUpdate(unitTag, unitHealth, unitMaxHealth)
+    end
+end
 
 
-
+function combinedBossBar:allUnitsDestroyed()
+    for i,unitTag in pairs(self.unitTags) do
+        self.bossHealthsCurrent[unitTag] = nil
+        self.bossHealthsMax[unitTag] = nil
+    end
+end
 
 
 
@@ -682,6 +693,7 @@ local hiddenBar = true
 local function setCombinedBarVisible(unitTag, visible)
 	if visible then
 		combinedVisibleTags[unitTag] = true
+        totalBossBar:unitCreated(unitTag)
 	else
 		combinedVisibleTags[unitTag] = nil
 	end
@@ -697,6 +709,7 @@ local function setCombinedBarVisible(unitTag, visible)
 			totalBossBar:Hide()
 			RefreshAllBosses()
 			totalBossBar:Refresh()
+            totalBossBar:allUnitsDestroyed()
             --hiddenBar = true
 		end
 	else
