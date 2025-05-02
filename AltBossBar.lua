@@ -65,10 +65,10 @@ localData["Lylanar"] = {
 
 -- u46 Boss with 6 health bars, use total health instead of individual health
 localData["Shaper of Flesh"] = {
-    [83] = "Portal Activated",
+    [84] = "Portal Activated",
     [67] = "Portal Activated",
     [50] = "Portal Activated",
-    [33] = "Portal Activated",
+    [34] = "Portal Activated",
     [17] = "Portal Activated",
     combinedHealthbar = true,
 }

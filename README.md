@@ -16,5 +16,8 @@ This is a modification to Alternative Boss Bar by BulDeZir, which includes a few
 ### `Mechanic Preview`
 - Utilizing the mechanics provided by Crutch Alerts, A M0R Alternative Boss Bar will show upcoming mechanics and their names in the health bar
 
+### `Combined Boss Bar`
+- For some fights like Shapers of Flesh, A M0R Alternative Boss Bar will display only one singular combined bar with thresholds for each Shaper kill instead of overloading your screen.
+
 ### Requirements:
 - LibAddonMenu2, CrutchAlerts
