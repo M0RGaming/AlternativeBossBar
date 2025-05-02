@@ -1,3 +1,7 @@
+Version 3.0.1
+----------
+*Dependacy version bump
+
 Version 3.0
 ----------
 Added the ability to have combined boss bars for certain encounters (like Shapers of Flesh)
